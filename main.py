@@ -8,7 +8,7 @@ ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 deck = []
 for suit in suits:
     for rank in ranks:
-        card = (suit,rank)
+        card = (suit, rank)
         deck.append(card)
 
 # Random generator is imported, and used to shuffle the deck. Paranthesis () is used because the deck should be ordered and immutable once shuffled
@@ -38,5 +38,27 @@ for _ in range(2):
     player_hand.append(deal_card(deck))
     dealer_hand.append(deal_card(deck))
 
-print("Your hand:", player_hand)
+#Logic for calculating hand value that is called upon when dealing the hand
+def calculate_hand_value(hand):
+    value = 0
+    ace_count = 0
+
+    for card in hand:
+        suit, rank = card
+
+        if rank in ['J', 'Q', 'K']:
+            value +=10
+        elif rank == 'A':
+            ace_count +=1
+            value +=11 #initially counts ace's a 11 in value
+        else:
+            value += int(rank) #valid for number cards
+
+#Below adjusts the value of aces in case the total value exceeds 21
+    while value > 21 and ace_count:
+        value -= 10 #this changes the value of an Ace from 11 to 1 (through the -10 function)
+    ace_count -= 1
+    return value
+
+print("Your hand:", player_hand, "Total value:", calculate_hand_value(player_hand))
 print("Dealer's hand: [", dealer_hand[0], ", Hidden]")
