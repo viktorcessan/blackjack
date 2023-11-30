@@ -75,3 +75,5 @@ while True:
         break
     else:
         print("Invalid input. Please enter 'hit' or 'stay'.")
+
+#todo add code that calculates if the player went bust after the first hit.
