@@ -60,5 +60,18 @@ def calculate_hand_value(hand):
     ace_count -= 1
     return value
 
+#The print messages show the player their initial hand, and the dealers first card
 print("Your hand:", player_hand, "Total value:", calculate_hand_value(player_hand))
 print("Dealer's hand: [", dealer_hand[0], ", Hidden]")
+
+#Offering player the choice to take another card, hit, or stay with the cards they have, stay.
+while True:
+    choice = input("Would you like to Hit, or Stay? Enter 'Hit', or 'H', or 'Stay' or 'S': ").lower()
+    if choice.lower() == 'hit' or choice.lower() == 'h':
+        player_hand.append(deal_card(deck))
+        print("Your hand:", player_hand, "Total value:", calculate_hand_value(player_hand))
+        break
+    elif choice.lower() == 'stay' or choice.lower() == 's':
+        break
+    else:
+        print("Invalid input. Please enter 'hit' or 'stay'.")
